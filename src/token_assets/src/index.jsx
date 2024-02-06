@@ -13,14 +13,16 @@ const init = async () => {
     await authClient.login({
       identityProvider: "https://identity.ic0.app/#authorize",
       onSuccess: ()=> {
-        handleAuthentication(authClient);
+        handleAuthenticated(authClient);
       }
     });
   }
 }
 
 async function handleAuthenticated(authClient){
-  ReactDOM.render(<App />, document.getElementById("root"));
+  const identity = await authClient.getIdentity();
+  const userPrincipal = identity._principal.toString();
+  ReactDOM.render(<App loggedInPrincipal={userPrincipal} />, document.getElementById("root"));
 }
 
 init();

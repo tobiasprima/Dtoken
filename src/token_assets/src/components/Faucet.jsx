@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { token, canisterId, createActor } from "../../../declarations/token/index";
 import { AuthClient } from "../../../../node_modules/@dfinity/auth-client/lib/cjs/index";
 
-function Faucet() {
+function Faucet(props) {
 
   const [isDisabled, setDisabled] = useState(false);
   const [buttonText, setButtonText] = useState("Gimme Gimme");
@@ -28,7 +28,7 @@ function Faucet() {
         </span>
         Faucet
       </h2>
-      <label>Get your free DBEY tokens here! Claim 10,000 DBEY coins to your account.</label>
+      <label>Get your free DBEY tokens here! Claim 10,000 DBEY coins to your principal Id({props.userPrincipal}.)</label>
       <p className="trade-buttons">
         <button id="btn-payout" onClick={handleClick} disabled={isDisabled}>
           {buttonText}
