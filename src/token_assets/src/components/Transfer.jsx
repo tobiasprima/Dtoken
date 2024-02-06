@@ -5,11 +5,19 @@ import { token } from "../../../declarations/token/index";
 function Transfer() {
   const [recipientId, setRecipientId] = useState("");
   const [transferAmount, setTransferAmount] = useState("");
+  const [isDisabled, setDisabled] = useState(false);
+  const [resultText, setResultText] = useState("");
+  const [isHidden, setHidden] = useState(true);
   
   async function handleClick() {
+    setHidden(true);
     const Recipient = Principal.fromText(recipientId)
     const amount = Number(transferAmount)
-    await token.transfer(Recipient, amount);
+    setDisabled(true);
+    const result = await token.transfer(Recipient, amount);
+    setResultText(result);
+    setDisabled(false);
+    setHidden(false);
   }
 
   return (
@@ -42,10 +50,11 @@ function Transfer() {
           </ul>
         </fieldset>
         <p className="trade-buttons">
-          <button id="btn-transfer" onClick={handleClick} >
+          <button id="btn-transfer" onClick={handleClick} disabled={isDisabled} >
             Transfer
           </button>
         </p>
+        <p hidden={isHidden}>{resultText}</p>
       </div>
     </div>
   );
