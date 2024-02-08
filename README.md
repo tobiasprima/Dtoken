@@ -1,3 +1,5 @@
+# Project from The complete 2024 Web Development Bootcamp by Dr. Angela Yu From Udemy
+
 # Check your Balance
 
 1. Find out your principal id:
